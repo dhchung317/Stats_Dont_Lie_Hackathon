@@ -4,9 +4,9 @@ package com.example.statsdontlie.view.fragments;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import com.example.statsdontlie.R;
 import com.example.statsdontlie.constants.BDLAppConstants;
 
 public class ResultFragment
-        extends Fragment {
+  extends Fragment {
 
 
     private int correct;
@@ -49,7 +49,7 @@ public class ResultFragment
             wrong = getArguments().getInt(BDLAppConstants.WRONG, -1);
         }
 
-        MediaPlayer mp = MediaPlayer.create(getContext(),R.raw.balldontlie);
+        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.balldontlie);
         mp.start();
     }
 
@@ -79,28 +79,16 @@ public class ResultFragment
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
 
-        final String concat_results = "Correct Answers: " + "\n" + correct + "\n" + "\n" + "Wrong Answers: " + "\n" +wrong;
+        final String concat_results = "Correct Answers: " + "\n" + correct + "\n" + "\n" + "Wrong Answers: " + "\n" + wrong;
         result.setText(concat_results);
 
         clickEvents();
     }
 
     public void clickEvents() {
-        menu.setOnClickListener(new View.OnClickListener() {
+        menu.setOnClickListener(v -> listener.displayMenuFragment());
 
-            @Override
-            public void onClick(View v) {
-                listener.displayMenuFragment();
-            }
-        });
-
-        restart.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                listener.displayGameFragment();
-            }
-        });
+        restart.setOnClickListener(v -> listener.displayGameFragment());
     }
 
     @Override

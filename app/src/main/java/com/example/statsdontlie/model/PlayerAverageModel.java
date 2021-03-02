@@ -2,8 +2,10 @@ package com.example.statsdontlie.model;
 
 public final class PlayerAverageModel {
 
+    private final long playerID;
     private final String firstName;
     private final String lastName;
+    private final String image;
     private final double playerPointAvg;
     private final double playerAssistAvg;
     private final double playerBlocksAvg;
@@ -11,16 +13,20 @@ public final class PlayerAverageModel {
     private final double player3PM;
     private final double player3PA;
 
-    public PlayerAverageModel(String firstName,
+    public PlayerAverageModel(long playerID,
+                              String firstName,
                               String lastName,
+                              String image,
                               double playerPointAvg,
                               double playerAssistAvg,
                               double playerBlocksAvg,
                               double playerDefRebAvg,
                               double player3PM,
                               double player3PA) {
+        this.playerID = playerID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.image = image;
         this.playerPointAvg = playerPointAvg;
         this.playerAssistAvg = playerAssistAvg;
         this.playerBlocksAvg = playerBlocksAvg;
@@ -41,12 +47,20 @@ public final class PlayerAverageModel {
         return playerDefRebAvg;
     }
 
+    public long getPlayerID() {
+        return playerID;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public double getPlayerPointAvg() {
@@ -59,14 +73,6 @@ public final class PlayerAverageModel {
 
     public double getPlayer3PA() {
         return player3PA;
-    }
-
-    public String createPlayerPhoto() {
-        if (getFirstName().equals("D'Angelo")) {
-            return "https://nba-players.herokuapp.com/players/" + getLastName() + "/" + "dangelo";
-        }
-        return "https://nba-players.herokuapp.com/players/" + getLastName() + "/" + getFirstName();
-
     }
 
     public double getStat(int position) {
@@ -88,17 +94,21 @@ public final class PlayerAverageModel {
         }
     }
 
+    public static final PlayerAverageModel EMPTY =
+      new PlayerAverageModel(1, null, null, null, 0,
+        0, 0, 0, 0, 0);
+
     @Override
     public String toString() {
         return "PlayerAverageModel{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", playerPointAvg=" + playerPointAvg +
-                ", playerAssistAvg=" + playerAssistAvg +
-                ", playerBlocksAvg=" + playerBlocksAvg +
-                ", playerDefRebAvg=" + playerDefRebAvg +
-                ", player3PM=" + player3PM +
-                ", player3PA=" + player3PA +
-                '}';
+          "firstName='" + firstName + '\'' +
+          ", lastName='" + lastName + '\'' +
+          ", playerPointAvg=" + playerPointAvg +
+          ", playerAssistAvg=" + playerAssistAvg +
+          ", playerBlocksAvg=" + playerBlocksAvg +
+          ", playerDefRebAvg=" + playerDefRebAvg +
+          ", player3PM=" + player3PM +
+          ", player3PA=" + player3PA +
+          '}';
     }
 }
